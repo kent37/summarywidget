@@ -13,3 +13,6 @@ Imports:
   crosstalk,
   htmltools,
   htmlwidgets
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

@@ -1,0 +1,30 @@
+---
+title: "Using summarywidget"
+author: "Kent S Johnson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using summarywidget}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(crosstalk)
+library(DT)
+library(summarywidget)
+
+shared_mtcars = SharedData$new(mtcars[,c("mpg", "cyl", "hp", "am")])
+
+summarywidget(shared_mtcars)
+
+bscols(widths = c(3,NA),
+  list(
+    filter_checkbox("cyl", "Cylinders", shared_mtcars, ~cyl, inline = TRUE),
+    filter_slider("hp", "Horsepower", shared_mtcars, ~hp, width = "100%")
+  ),
+  datatable(shared_mtcars, width=600)
+)
+```
+
+

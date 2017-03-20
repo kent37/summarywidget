@@ -48,6 +48,7 @@ summarywidget <- function(data,
     if (!is.logical(selection))
       stop("Selection must contain TRUE/FALSE values.")
     data = data[selection,]
+    key = key[selection]
   }
 
   # We just need one column, either the row.names or the specified column.
@@ -110,4 +111,9 @@ summarywidgetOutput <- function(outputId, width = '100%', height = '400px'){
 renderSummarywidget <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   htmlwidgets::shinyRenderWidget(expr, summarywidgetOutput, env, quoted = TRUE)
+}
+
+# Use a <span> container rather than the default <div>
+summarywidget_html <- function(id, style, class, ...){
+  htmltools::tags$span(id = id, class = class)
 }

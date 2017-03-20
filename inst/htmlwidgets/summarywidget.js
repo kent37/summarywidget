@@ -6,25 +6,62 @@ HTMLWidgets.widget({
 
   factory: function(el, width, height) {
 
-    return {
+    filterKeys = function(obj, keys) {
+      var result = {};
+      keys.forEach(function(k) { result[k]=obj[k];});
+    };
 
+    return {
       renderValue: function(x) {
+
+        // Make a data object with keys
+        var data = {};
+        var i;
+        if (x.settings.crosstalk_key === null) {
+          for (i=0; i<x.data.length; i++) {
+            data[i] = x.data[i];
+          }
+        } else {
+          for (i=0; i<x.settings.crosstalk_key.length; i++) {
+            data[x.settings.crosstalk_key[i]] = x.data[i];
+          }
+        }
+
+        update = function(d) {
+          // Get a simple vector. Don't use Object.values(), RStudio doesn't seem to support it.
+          var values = [];
+          for (var key in d) {
+            if (d.hasOwnProperty(key)) { values.push(d[key]);}
+          }
+
         var value = 0;
         switch (x.settings.statistic) {
           case 'count':
-            value = x.data.length;
+            value = values.length;
             break;
           case 'sum':
-            value = x.data.reduce(function(acc, val) {return acc + val;}, 0);
+            value = values.reduce(function(acc, val) {return acc + val;}, 0);
             break;
           case 'mean':
-            value = x.data.reduce(function(acc, val) {return acc + val;}, 0) / x.data.length;
+            value = values.reduce(function(acc, val) {return acc + val;}, 0) / values.length;
             break;
         }
 
         if (x.settings.digits !== null) value = value.toFixed(x.settings.digits);
         el.innerText = value;
+       };
 
+       var ct_sel = new crosstalk.SelectionHandle();
+       ct_sel.setGroup(x.settings.crosstalk_group);
+       ct_sel.on("change", function(e) {
+         if (e.value && e.value.length) {
+           update(filterKeys(data, e.value));
+         } else {
+           update(data);
+         }
+       });
+
+       update(data);
       },
 
       resize: function(width, height) {
