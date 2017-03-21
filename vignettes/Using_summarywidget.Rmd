@@ -29,4 +29,6 @@ bscols(widths = c(3,NA),
 ### Summary
 
 You have selected `r summarywidget(shared_mtcars)` cars with an average mpg of
-`r summarywidget(shared_mtcars, 'mean', 'mpg', digits=1)`.
+`r summarywidget(shared_mtcars, 'mean', 'mpg', digits=1)`. The `r summarywidget(shared_mtcars, selection=~am==0)` cars with automatic transmission
+have an average mpg of 
+`r summarywidget(shared_mtcars, 'mean', 'mpg', selection=~am==0, digits=1)`.
