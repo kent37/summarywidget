@@ -4,8 +4,8 @@
 \alias{summarywidget}
 \title{Widget that shows a single summary statistic}
 \usage{
-summarywidget(data, statistic = c("count", "sum", "mean"), digits = 0,
-  selection = NULL, column = NULL, width = NULL, height = NULL,
+summarywidget(data, statistic = c("count", "sum", "mean"), column = NULL,
+  selection = NULL, digits = 0, width = NULL, height = NULL,
   elementId = NULL)
 }
 \arguments{
@@ -13,14 +13,14 @@ summarywidget(data, statistic = c("count", "sum", "mean"), digits = 0,
 
 \item{statistic}{The statistic to compute.}
 
-\item{digits}{Number of decimal places to display, or NULL to display full precision.}
+\item{column}{For \code{sum} and \code{mean} statistics, the column of \code{data} to summarize.
+Not used for \code{count} statistic.}
 
 \item{selection}{Expression to select a fixed subset of \code{data}. May be
 a logical vector or a one-sided formula that evaluates to a logical vector.
 If used, the \code{key} given to \link[crosstalk:SharedData]{crosstalk::SharedData} must be a fixed column (not row numbers).}
 
-\item{column}{For \code{sum} and \code{mean} statistics, the column of \code{data} to summarize.
-Not used for \code{count} statistic.}
+\item{digits}{Number of decimal places to display, or NULL to display full precision.}
 }
 \description{
 \code{summarywidget} displays a single statistic derived from a linked table.

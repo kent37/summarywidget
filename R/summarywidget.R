@@ -7,20 +7,20 @@
 #'
 #' @param data Data to summarize, normally an instance of [crosstalk::SharedData].
 #' @param statistic The statistic to compute.
-#' @param digits Number of decimal places to display, or NULL to display full precision.
+#' @param column For `sum` and `mean` statistics, the column of `data` to summarize.
+#' Not used for `count` statistic.
 #' @param selection Expression to select a fixed subset of `data`. May be
 #' a logical vector or a one-sided formula that evaluates to a logical vector.
 #' If used, the `key` given to [crosstalk::SharedData] must be a fixed column (not row numbers).
-#' @param column For `sum` and `mean` statistics, the column of `data` to summarize.
-#' Not used for `count` statistic.
+#' @param digits Number of decimal places to display, or NULL to display full precision.
 #'
 #' @import crosstalk
 #' @import htmlwidgets
 #'
 #' @export
 summarywidget <- function(data,
-                          statistic=c("count", "sum", "mean"), digits=0,
-                          selection=NULL, column = NULL,
+                          statistic=c("count", "sum", "mean"), column = NULL,
+                          selection=NULL, digits=0,
                           width=NULL, height=NULL, elementId = NULL) {
 
   if (crosstalk::is.SharedData(data)) {

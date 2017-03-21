@@ -29,4 +29,4 @@ bscols(widths = c(3,NA),
 ### Summary
 
 You have selected `r summarywidget(shared_mtcars)` cars with an average mpg of
-`r summarywidget(shared_mtcars, 'mean', column='mpg', digits=1)`.
+`r summarywidget(shared_mtcars, 'mean', 'mpg', digits=1)`.

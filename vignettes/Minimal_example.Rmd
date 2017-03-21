@@ -18,6 +18,6 @@ library(summarywidget)
 The `mtcars` dataset has `r summarywidget(mtcars)` rows (32).
 
 The mean mpg of four-cylinder cars is 
-`r summarywidget(mtcars, 'mean', selection=~cyl==4, column='mpg', digits=2)` mpg (26.66).
+`r summarywidget(mtcars, 'mean', 'mpg', selection=~cyl==4, digits=2)` mpg (26.66).
 
-`r summarywidget(mtcars, 'sum', column='am')` cars in the dataset have manual transmissions (13).
+`r summarywidget(mtcars, 'sum', 'am')` cars in the dataset have manual transmissions (13).
