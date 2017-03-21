@@ -1,0 +1,67 @@
+---
+title: "Using summarywidget"
+author: "Kent S Johnson"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using summarywidget}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+`summarywidget` is designed to work with the `crosstalk` package and other 
+crosstalk-enabled widgets. A `summarywidget` provides a single summary statistic
+which reflects the selection made in the other widgets.
+
+This quick introduction shows how to use `summarywidget` to summarize data
+shown in a `DT::datatable` and manipulated with `crosstalk::filter_checkbox`
+and `crosstalk::filter_selection` widgets.
+
+### Load required packages
+
+```{r}
+library(crosstalk)
+library(DT)
+library(summarywidget)
+```
+
+### Data object
+
+To use data with `crosstalk`, it must be wrapped in a `crosstalk::SharedData` object. We will display the `mtcars` data.
+
+```{r}
+shared_mtcars = SharedData$new(mtcars[,c("mpg", "cyl", "hp", "am")])
+```
+
+### Data display and manipulation
+
+This section displays the data and two widgets. Data subsets are selected with the widgets or by clicking on the table. `crosstalk::bscols` arranges the widgets in two columns.
+
+```{r}
+bscols(widths = c(3,NA),
+  list(
+    filter_checkbox("cyl", "Cylinders", shared_mtcars, ~cyl, inline = TRUE),
+    filter_slider("hp", "Horsepower", shared_mtcars, ~hp, width = "100%")
+  ),
+  datatable(shared_mtcars, width=600, height=300, options=list(pageLength=5))
+)
+```
+
+### Summarywidgets
+
+You have selected `r summarywidget(shared_mtcars)` cars with an average mpg of
+`r summarywidget(shared_mtcars, 'mean', 'mpg', digits=1)`. The `r summarywidget(shared_mtcars, selection=~am==0)` cars with automatic transmission
+have an average mpg of 
+`r summarywidget(shared_mtcars, 'mean', 'mpg', selection=~am==0, digits=1)`.
+
+The text above uses four `summarywidget` instances to show four different summary statistics. 
+
+- The number of cars selected is displayed with `summarywidget(shared_mtcars)`.
+- Adding `statistic='mean'` and `column='mpg'` makes a widget which displays 
+the average mpg for the selected cars.
+- `summarywidget(shared_mtcars, selection=~am==0)` restricts the count to only cars with automatic
+transmission.
+- Putting it all together, `summarywidget(shared_mtcars, 'mean', 'mpg', selection=~am==0, digits=1)` shows the average mpg for selected cars with 
+automatic transmission.
+

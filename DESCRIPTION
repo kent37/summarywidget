@@ -1,10 +1,10 @@
 Package: summarywidget
-Title: What the Package Does (one line, title case)
+Title: Display Summary Statistics from Linked Data
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Kent", "Johnson", email = "kent@kentsjohnson.com", role = c("aut", "cre"))
+Description: summarywidget displays a single statistic derived from a linked table. It's primary use is with the crosstalk package. Used with crosstalk, a summarywidget displays a value which updates as the data selection changes.
 Depends: R (>= 3.3.2)
-License: What license is it under?
+License: MIT
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -14,5 +14,6 @@ Imports:
   htmltools,
   htmlwidgets
 Suggests: knitr,
-    rmarkdown
+    rmarkdown,
+    DT
 VignetteBuilder: knitr
