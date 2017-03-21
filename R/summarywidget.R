@@ -45,6 +45,7 @@ summarywidget <- function(data,
         stop("Unexpected two-sided formula: ", deparse(selection))
       selection = eval(selection[[2]], data, environment(selection))
     }
+
     if (!is.logical(selection))
       stop("Selection must contain TRUE/FALSE values.")
     data = data[selection,]

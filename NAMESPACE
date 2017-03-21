@@ -3,4 +3,5 @@
 export(renderSummarywidget)
 export(summarywidget)
 export(summarywidgetOutput)
+import(crosstalk)
 import(htmlwidgets)

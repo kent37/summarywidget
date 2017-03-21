@@ -1,20 +1,19 @@
 HTMLWidgets.widget({
-
   name: 'summarywidget',
-
   type: 'output',
 
   factory: function(el, width, height) {
 
-    filterKeys = function(obj, keys) {
+    var filterKeys = function(obj, keys) {
       var result = {};
       keys.forEach(function(k) { result[k]=obj[k];});
+      return result;
     };
 
     return {
       renderValue: function(x) {
 
-        // Make a data object with keys
+        // Make a data object with keys so we can easily update the selection
         var data = {};
         var i;
         if (x.settings.crosstalk_key === null) {
@@ -27,30 +26,32 @@ HTMLWidgets.widget({
           }
         }
 
-        update = function(d) {
+        // Update the display to show the values in d
+        var update = function(d) {
           // Get a simple vector. Don't use Object.values(), RStudio doesn't seem to support it.
           var values = [];
           for (var key in d) {
             if (d.hasOwnProperty(key)) { values.push(d[key]);}
           }
 
-        var value = 0;
-        switch (x.settings.statistic) {
-          case 'count':
-            value = values.length;
-            break;
-          case 'sum':
-            value = values.reduce(function(acc, val) {return acc + val;}, 0);
-            break;
-          case 'mean':
-            value = values.reduce(function(acc, val) {return acc + val;}, 0) / values.length;
-            break;
-        }
+          var value = 0;
+          switch (x.settings.statistic) {
+            case 'count':
+              value = values.length;
+              break;
+            case 'sum':
+              value = values.reduce(function(acc, val) {return acc + val;}, 0);
+              break;
+            case 'mean':
+              value = values.reduce(function(acc, val) {return acc + val;}, 0) / values.length;
+              break;
+          }
 
-        if (x.settings.digits !== null) value = value.toFixed(x.settings.digits);
-        el.innerText = value;
+          if (x.settings.digits !== null) value = value.toFixed(x.settings.digits);
+          el.innerText = value;
        };
 
+       // Set up to receive crosstalk events
        var ct_sel = new crosstalk.SelectionHandle();
        ct_sel.setGroup(x.settings.crosstalk_group);
        ct_sel.on("change", function(e) {
