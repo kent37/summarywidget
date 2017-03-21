@@ -4,9 +4,13 @@ HTMLWidgets.widget({
 
   factory: function(el, width, height) {
 
+    // Filter obj, returning a new obj containing only
+    // values with keys in keys.
     var filterKeys = function(obj, keys) {
       var result = {};
-      keys.forEach(function(k) { result[k]=obj[k];});
+      keys.forEach(function(k) {
+        if (obj.hasOwnProperty(k))
+          result[k]=obj[k];});
       return result;
     };
 
@@ -55,7 +59,7 @@ HTMLWidgets.widget({
        var ct_filter = new crosstalk.FilterHandle();
        ct_filter.setGroup(x.settings.crosstalk_group);
        ct_filter.on("change", function(e) {
-         if (e.value && e.value.length) {
+         if (e.value) {
            update(filterKeys(data, e.value));
          } else {
            update(data);
