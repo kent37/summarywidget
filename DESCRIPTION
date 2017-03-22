@@ -3,8 +3,10 @@ Title: Display Summary Statistics from Linked Data
 Version: 0.0.0.9000
 Authors@R: person("Kent", "Johnson", email = "kent@kentsjohnson.com", role = c("aut", "cre"))
 Description: summarywidget displays a single statistic derived from a linked table. It's primary use is with the crosstalk package. Used with crosstalk, a summarywidget displays a value which updates as the data selection changes.
+URL: https://github.com/kent37/summarywidget
+BugReports: https://github.com/kent37/summarywidget/issues
 Depends: R (>= 3.3.2)
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
