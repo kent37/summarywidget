@@ -23,8 +23,8 @@ If used, the \code{key} given to \link[crosstalk:SharedData]{crosstalk::SharedDa
 \item{digits}{Number of decimal places to display, or NULL to display full precision.}
 }
 \description{
-\code{summarywidget} displays a single statistic derived from a linked table.
-It's primary use is with the \code{crosstalk} package. Used with \code{crosstalk},
+A \code{summarywidget} displays a single statistic derived from a linked table.
+Its primary use is with the \code{crosstalk} package. Used with \code{crosstalk},
 a \code{summarywidget} displays a value which updates as the data selection
 changes.
 }

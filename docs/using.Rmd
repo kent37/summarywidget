@@ -83,4 +83,4 @@ summarywidget(shared_mtcars, 'mean', 'mpg', selection=~am==0, digits=1)
 <div>&nbsp;</div>
 
 The output of `summarywidget` is enclosed in a `<span>` tag so you can use it inline
-in text. See the [Home](index.html) page for an example.
+in text. See the [Introduction](index.html) for an example.

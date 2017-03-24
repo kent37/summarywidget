@@ -41,4 +41,4 @@ bscols(widths = c(3,NA),
 
 ### Next steps
 
-Read the [Using SummaryWidget](using.html) guide. See the [Extended Example](example.html) for another use.
+Read the [Using SummaryWidget](using.html) guide.

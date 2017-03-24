@@ -3,12 +3,10 @@ navbar:
   title: "SummaryWidget"
   type: inverse
   left:
-    - text: "Home"
+    - text: "Introduction"
       href: index.html
     - text: "Using SummaryWidget"
       href: using.html
-    - text: "Extended Example"
-      href: example.html
   right:
     - icon: fa-github fa-lg
       href: https://github.com/kent37/summarywidget

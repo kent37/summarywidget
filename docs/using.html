@@ -181,13 +181,10 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
+  <a href="index.html">Introduction</a>
 </li>
 <li>
   <a href="using.html">Using SummaryWidget</a>
-</li>
-<li>
-  <a href="example.html">Extended Example</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -250,40 +247,40 @@ shared_mtcars = SharedData$new(mtcars)</code></pre>
     "6": ["Mazda RX4", "Mazda RX4 Wag", "Hornet 4 Drive", "Valiant", "Merc 280", "Merc 280C", "Ferrari Dino"],
     "8": ["Hornet Sportabout", "Duster 360", "Merc 450SE", "Merc 450SL", "Merc 450SLC", "Cadillac Fleetwood", "Lincoln Continental", "Chrysler Imperial", "Dodge Challenger", "AMC Javelin", "Camaro Z28", "Pontiac Firebird", "Ford Pantera L", "Maserati Bora"]
   },
-  "group": ["SharedData9697b883"]
+  "group": ["SharedData77719b3f"]
 }</script>
 </div>
 <p>Create a <code>summarywidget</code> with a reference to the shared data. The <code>summarywidget</code> default statistic is a simple count of selected items. Click the checkboxes above to see the count change below.</p>
 <pre class="r"><code>library(summarywidget)
 
 summarywidget(shared_mtcars)</code></pre>
-<span id="htmlwidget-c981411beb37da705014" class="summarywidget html-widget"></span>
-<script type="application/json" data-for="htmlwidget-c981411beb37da705014">{"x":{"data":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"settings":{"statistic":"count","digits":0,"crosstalk_key":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"crosstalk_group":"SharedData9697b883"}},"evals":[],"jsHooks":[]}</script>
+<span id="htmlwidget-1b941d40331149212016" class="summarywidget html-widget"></span>
+<script type="application/json" data-for="htmlwidget-1b941d40331149212016">{"x":{"data":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"settings":{"statistic":"count","digits":0,"crosstalk_key":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"crosstalk_group":"SharedData77719b3f"}},"evals":[],"jsHooks":[]}</script>
 <div>
  
 </div>
 <p>A <code>summarywidget</code> can display a count, arithmetic mean or sum. To display a sum or mean you must also specify the column to summarize. Here we show the mean MPG for the selected cars. The <code>digits</code> parameter controls the number of decimal digits displayed.</p>
 <pre class="r"><code>summarywidget(shared_mtcars, statistic=&#39;mean&#39;, column=&#39;mpg&#39;, digits=1)</code></pre>
-<span id="htmlwidget-fb057ae1a010f748619d" class="summarywidget html-widget"></span>
-<script type="application/json" data-for="htmlwidget-fb057ae1a010f748619d">{"x":{"data":[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],"settings":{"statistic":"mean","digits":1,"crosstalk_key":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"crosstalk_group":"SharedData9697b883"}},"evals":[],"jsHooks":[]}</script>
+<span id="htmlwidget-5ccc9f6e5de29f74096d" class="summarywidget html-widget"></span>
+<script type="application/json" data-for="htmlwidget-5ccc9f6e5de29f74096d">{"x":{"data":[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],"settings":{"statistic":"mean","digits":1,"crosstalk_key":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"crosstalk_group":"SharedData77719b3f"}},"evals":[],"jsHooks":[]}</script>
 <div>
  
 </div>
 <p>You can also apply a filter to the initial data set and display a summary restricted to the filtered data. Here we show the count of selected cars with automatic transmission.</p>
 <pre class="r"><code>summarywidget(shared_mtcars, selection=~am==0)</code></pre>
-<span id="htmlwidget-f5c018c53de912c39636" class="summarywidget html-widget"></span>
-<script type="application/json" data-for="htmlwidget-f5c018c53de912c39636">{"x":{"data":["Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird"],"settings":{"statistic":"count","digits":0,"crosstalk_key":["Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird"],"crosstalk_group":"SharedData9697b883"}},"evals":[],"jsHooks":[]}</script>
+<span id="htmlwidget-1cf7cadf2a77150663d4" class="summarywidget html-widget"></span>
+<script type="application/json" data-for="htmlwidget-1cf7cadf2a77150663d4">{"x":{"data":["Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird"],"settings":{"statistic":"count","digits":0,"crosstalk_key":["Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird"],"crosstalk_group":"SharedData77719b3f"}},"evals":[],"jsHooks":[]}</script>
 <div>
  
 </div>
 <p>Putting it all together, this example shows the average MPG for selected cars with automatic transmission.</p>
 <pre class="r"><code>summarywidget(shared_mtcars, &#39;mean&#39;, &#39;mpg&#39;, selection=~am==0, digits=1)</code></pre>
-<span id="htmlwidget-4ac27c2b2fee138f0f12" class="summarywidget html-widget"></span>
-<script type="application/json" data-for="htmlwidget-4ac27c2b2fee138f0f12">{"x":{"data":[21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,21.5,15.5,15.2,13.3,19.2],"settings":{"statistic":"mean","digits":1,"crosstalk_key":["Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird"],"crosstalk_group":"SharedData9697b883"}},"evals":[],"jsHooks":[]}</script>
+<span id="htmlwidget-492235da4a00efb0c34b" class="summarywidget html-widget"></span>
+<script type="application/json" data-for="htmlwidget-492235da4a00efb0c34b">{"x":{"data":[21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,21.5,15.5,15.2,13.3,19.2],"settings":{"statistic":"mean","digits":1,"crosstalk_key":["Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird"],"crosstalk_group":"SharedData77719b3f"}},"evals":[],"jsHooks":[]}</script>
 <div>
  
 </div>
-<p>The output of <code>summarywidget</code> is enclosed in a <code>&lt;span&gt;</code> tag so you can use it inline in text. See the <a href="index.html">Home</a> page for an example.</p>
+<p>The output of <code>summarywidget</code> is enclosed in a <code>&lt;span&gt;</code> tag so you can use it inline in text. See the <a href="index.html">Introduction</a> for an example.</p>
 
 
 
