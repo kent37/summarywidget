@@ -28,3 +28,6 @@ It's primary use is with the \code{crosstalk} package. Used with \code{crosstalk
 a \code{summarywidget} displays a value which updates as the data selection
 changes.
 }
+\seealso{
+\url{https://kent37.github.io/summarywidget}
+}

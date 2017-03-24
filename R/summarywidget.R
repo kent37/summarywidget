@@ -18,6 +18,7 @@
 #' @import htmlwidgets
 #'
 #' @export
+#' @seealso \url{https://kent37.github.io/summarywidget}
 summarywidget <- function(data,
                           statistic=c("count", "sum", "mean"), column = NULL,
                           selection=NULL, digits=0,
