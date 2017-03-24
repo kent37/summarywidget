@@ -55,11 +55,21 @@ HTMLWidgets.widget({
           el.innerText = value;
        };
 
-       // Set up to receive crosstalk filter events
+       // Set up to receive crosstalk filter and selection events
        var ct_filter = new crosstalk.FilterHandle();
        ct_filter.setGroup(x.settings.crosstalk_group);
        ct_filter.on("change", function(e) {
          if (e.value) {
+           update(filterKeys(data, e.value));
+         } else {
+           update(data);
+         }
+       });
+
+       var ct_sel = new crosstalk.SelectionHandle();
+       ct_sel.setGroup(x.settings.crosstalk_group);
+       ct_sel.on("change", function(e) {
+         if (e.value && e.value.length) {
            update(filterKeys(data, e.value));
          } else {
            update(data);
