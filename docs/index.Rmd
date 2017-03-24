@@ -1,70 +1,44 @@
 ---
 title: "SummaryWidget"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: scroll
-    theme: spacelab
-    navbar:
-      - { icon: "fa-github", href: "https://github.com/kent37/summarywidget", align: right }
 ---
 
 ```{r setup, include=FALSE}
-library(flexdashboard)
-knitr::opts_chunk$set(echo = TRUE)
+library(crosstalk)
+library(DT)
+library(summarywidget)
+
+shared_mtcars = SharedData$new(mtcars[,c("mpg", "cyl", "hp", "am")])
 ```
 
-Using
-===================================== 
-    
-SummaryWidget is an [htmlwidget](http://www.htmlwidgets.org) which works with
-[crosstalk](https://rstudio.github.io/crosstalk/index.html) to display a single
-summary statistic which updates when the `crosstalk` selection changes. A SummaryWidget can display the count, sum or mean of one column of the selected data. 
+SummaryWidget is an [HTML widget](http://www.htmlwidgets.org) which works with
+[Crosstalk](https://rstudio.github.io/crosstalk/index.html) to display a single
+summary statistic. The statistic updates when the Crosstalk selection changes. A SummaryWidget can display the count, sum or mean of one column of selected data. 
 It can also have a fixed filter that selects a subset of the full dataset.
 
-#### Simple example
+Try the example below. Click the checkboxes, manipulate the slider and
+click rows in the data table. Watch the summary text update as the data selection changes.
+The summary text uses four `summarywidget` instances to show four different summary statistics. 
 
-This code uses `crosstalk` to select from the `mtcars` database and 
-a single `summarywidget` to report the number of cars selected. 
+-----
 
-#### Install `crosstalk` and `summarywidget`
+<big>You have selected **`r summarywidget(shared_mtcars)`** cars with an average mpg of
+**`r summarywidget(shared_mtcars, 'mean', 'mpg', digits=1)`**. 
+The **`r summarywidget(shared_mtcars, selection=~am==0)`** cars with automatic
+transmission have an average mpg of 
+**`r summarywidget(shared_mtcars, 'mean', 'mpg', selection=~am==0, digits=1)`**.</big>
 
-```
-devtools::install_github("rstudio/crosstalk")
-devtools::install_github("kent37/summarywidget")
-```
 
-#### Load libraries
-
-```{r example1}
-library(crosstalk)
-library(summarywidget)
-```
-
-#### Create a crosstalk::SharedData object
-
-```{r}
-shared_mtcars = SharedData$new(mtcars)
-```
-
-#### Create a crosstalk checkbox
-
-Click the checkboxes and see the count change below.
-
-```{r}
-filter_checkbox("cyl", "Cylinders", shared_mtcars, ~cyl, inline = TRUE)
+```{r example, echo=FALSE}
+bscols(widths = c(3,NA),
+  list(
+    filter_checkbox("cyl", "Cylinders", shared_mtcars, ~cyl, inline = TRUE),
+    filter_slider("hp", "Horsepower", shared_mtcars, ~hp, width = "100%")
+  ),
+  datatable(shared_mtcars, width=600, height=300, 
+            options=list(pageLength=5, dom='tp'))
+)
 ```
 
-#### Show the number of cars selected
+### Next steps
 
-The default is to show a count of selected items.
-
-```{r}
-summarywidget(shared_mtcars)
-```
-   
-Example
-=====================================     
-
-### Chart 1
-    
+Read the [Using SummaryWidget](using.html) guide. See the [Extended Example](example.html) for another use.

@@ -1,0 +1,21 @@
+name: "summaryWidget"
+navbar:
+  title: "SummaryWidget"
+  type: inverse
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Using SummaryWidget"
+      href: using.html
+    - text: "Extended Example"
+      href: example.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/kent37/summarywidget
+output:
+  html_document:
+    theme: spacelab
+    highlight: textmate
+    toc_depth: 3
+    toc_float: true
+output_dir: .

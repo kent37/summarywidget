@@ -2,7 +2,7 @@
 % Please edit documentation in R/summarywidget.R
 \name{summarywidget}
 \alias{summarywidget}
-\title{Widget that shows a single summary statistic}
+\title{Show a single summary statistic in a widget}
 \usage{
 summarywidget(data, statistic = c("count", "sum", "mean"), column = NULL,
   selection = NULL, digits = 0, width = NULL, height = NULL,

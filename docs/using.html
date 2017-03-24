@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Using SummaryWidget</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/crosstalk-1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.1/js/crosstalk.min.js"></script>
+<script src="site_libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<script src="site_libs/summarywidget-binding-0.0.0.9000/summarywidget.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 52px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+
+.section h2 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h3 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h4 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h5 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h6 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">SummaryWidget</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="using.html">Using SummaryWidget</a>
+</li>
+<li>
+  <a href="example.html">Extended Example</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/kent37/summarywidget">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Using SummaryWidget</h1>
+
+</div>
+
+
+<p>SummaryWidget reports summary statistics for a data set linked with Crosstalk-compatible <a href="http://htmlwidgets.org">HTML widgets</a> within an R Markdown page or Shiny app.</p>
+<p>To begin, install the <code>summarywidget</code> and <code>crosstalk</code> packages:</p>
+<pre class="r"><code>devtools::install_github(&quot;kent37/summarywidget&quot;)
+devtools::install_github(&quot;rstudio/crosstalk&quot;)</code></pre>
+<p>The <code>crosstalk</code> package includes widgets which control selection within a dataset. You may also want to use other Crosstalk-compatible widgets; the <a href="https://rstudio.github.io/crosstalk/">Crosstalk documentation</a> has a <a href="https://rstudio.github.io/crosstalk/widgets.html">list</a>. To keep this guide simple, it uses a single <code>crosstalk::filter_checkbox</code> for selection.</p>
+<div>
+ 
+</div>
+<p>Crosstalk links widgets through an instance of <code>crosstalk::SharedData</code>. Here, we share the <code>mtcars</code> data set.</p>
+<pre class="r"><code>library(crosstalk)
+
+shared_mtcars = SharedData$new(mtcars)</code></pre>
+<div>
+ 
+</div>
+<p>A <code>crosstalk::filter_checkbox</code> allows selection from a categorical variable such as the <code>Cylinders</code> column of the <code>shared_mtcars</code> data.</p>
+<pre class="r"><code>filter_checkbox(&quot;cyl&quot;, &quot;Cylinders&quot;, shared_mtcars, ~cyl, inline = TRUE)</code></pre>
+<div id="cyl" class="form-group crosstalk-input-checkboxgroup crosstalk-input">
+<label class="control-label" for="cyl">Cylinders</label>
+<div class="crosstalk-options-group">
+<label class="checkbox-inline">
+<input type="checkbox" name="cyl" value="4"/>
+<span>4</span>
+</label>
+<label class="checkbox-inline">
+<input type="checkbox" name="cyl" value="6"/>
+<span>6</span>
+</label>
+<label class="checkbox-inline">
+<input type="checkbox" name="cyl" value="8"/>
+<span>8</span>
+</label>
+</div>
+<script type="application/json" data-for="cyl">{
+  "map": {
+    "4": ["Datsun 710", "Merc 240D", "Merc 230", "Fiat 128", "Honda Civic", "Toyota Corolla", "Toyota Corona", "Fiat X1-9", "Porsche 914-2", "Lotus Europa", "Volvo 142E"],
+    "6": ["Mazda RX4", "Mazda RX4 Wag", "Hornet 4 Drive", "Valiant", "Merc 280", "Merc 280C", "Ferrari Dino"],
+    "8": ["Hornet Sportabout", "Duster 360", "Merc 450SE", "Merc 450SL", "Merc 450SLC", "Cadillac Fleetwood", "Lincoln Continental", "Chrysler Imperial", "Dodge Challenger", "AMC Javelin", "Camaro Z28", "Pontiac Firebird", "Ford Pantera L", "Maserati Bora"]
+  },
+  "group": ["SharedData9697b883"]
+}</script>
+</div>
+<p>Create a <code>summarywidget</code> with a reference to the shared data. The <code>summarywidget</code> default statistic is a simple count of selected items. Click the checkboxes above to see the count change below.</p>
+<pre class="r"><code>library(summarywidget)
+
+summarywidget(shared_mtcars)</code></pre>
+<span id="htmlwidget-c981411beb37da705014" class="summarywidget html-widget"></span>
+<script type="application/json" data-for="htmlwidget-c981411beb37da705014">{"x":{"data":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"settings":{"statistic":"count","digits":0,"crosstalk_key":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"crosstalk_group":"SharedData9697b883"}},"evals":[],"jsHooks":[]}</script>
+<div>
+ 
+</div>
+<p>A <code>summarywidget</code> can display a count, arithmetic mean or sum. To display a sum or mean you must also specify the column to summarize. Here we show the mean MPG for the selected cars. The <code>digits</code> parameter controls the number of decimal digits displayed.</p>
+<pre class="r"><code>summarywidget(shared_mtcars, statistic=&#39;mean&#39;, column=&#39;mpg&#39;, digits=1)</code></pre>
+<span id="htmlwidget-fb057ae1a010f748619d" class="summarywidget html-widget"></span>
+<script type="application/json" data-for="htmlwidget-fb057ae1a010f748619d">{"x":{"data":[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],"settings":{"statistic":"mean","digits":1,"crosstalk_key":["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],"crosstalk_group":"SharedData9697b883"}},"evals":[],"jsHooks":[]}</script>
+<div>
+ 
+</div>
+<p>You can also apply a filter to the initial data set and display a summary restricted to the filtered data. Here we show the count of selected cars with automatic transmission.</p>
+<pre class="r"><code>summarywidget(shared_mtcars, selection=~am==0)</code></pre>
+<span id="htmlwidget-f5c018c53de912c39636" class="summarywidget html-widget"></span>
+<script type="application/json" data-for="htmlwidget-f5c018c53de912c39636">{"x":{"data":["Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird"],"settings":{"statistic":"count","digits":0,"crosstalk_key":["Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird"],"crosstalk_group":"SharedData9697b883"}},"evals":[],"jsHooks":[]}</script>
+<div>
+ 
+</div>
+<p>Putting it all together, this example shows the average MPG for selected cars with automatic transmission.</p>
+<pre class="r"><code>summarywidget(shared_mtcars, &#39;mean&#39;, &#39;mpg&#39;, selection=~am==0, digits=1)</code></pre>
+<span id="htmlwidget-4ac27c2b2fee138f0f12" class="summarywidget html-widget"></span>
+<script type="application/json" data-for="htmlwidget-4ac27c2b2fee138f0f12">{"x":{"data":[21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,21.5,15.5,15.2,13.3,19.2],"settings":{"statistic":"mean","digits":1,"crosstalk_key":["Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird"],"crosstalk_group":"SharedData9697b883"}},"evals":[],"jsHooks":[]}</script>
+<div>
+ 
+</div>
+<p>The output of <code>summarywidget</code> is enclosed in a <code>&lt;span&gt;</code> tag so you can use it inline in text. See the <a href="index.html">Home</a> page for an example.</p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

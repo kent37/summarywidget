@@ -1,4 +1,4 @@
-#' Widget that shows a single summary statistic
+#' Show a single summary statistic in a widget
 #'
 #' `summarywidget` displays a single statistic derived from a linked table.
 #' It's primary use is with the `crosstalk` package. Used with `crosstalk`,

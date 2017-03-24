@@ -1,0 +1,86 @@
+---
+title: "Using SummaryWidget"
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+SummaryWidget reports summary statistics for a data set linked with Crosstalk-compatible [HTML widgets](http://htmlwidgets.org) within an R Markdown page or Shiny app. 
+
+To begin, install the `summarywidget` and `crosstalk` packages:
+
+```{r eval=FALSE}
+devtools::install_github("kent37/summarywidget")
+devtools::install_github("rstudio/crosstalk")
+```
+
+The `crosstalk` package includes widgets which control selection within a dataset.
+You may also want to use other Crosstalk-compatible widgets; the [Crosstalk documentation](https://rstudio.github.io/crosstalk/) has a [list](https://rstudio.github.io/crosstalk/widgets.html). To keep this guide simple,
+it uses a single `crosstalk::filter_checkbox` for selection.
+
+<div>&nbsp;</div>
+
+Crosstalk links widgets through an instance of `crosstalk::SharedData`. Here,
+we share the `mtcars` data set.
+
+```{r example1}
+library(crosstalk)
+
+shared_mtcars = SharedData$new(mtcars)
+```
+
+<div>&nbsp;</div>
+
+A `crosstalk::filter_checkbox` allows selection from a categorical variable
+such as the `Cylinders` column of the `shared_mtcars` data.
+
+```{r}
+filter_checkbox("cyl", "Cylinders", shared_mtcars, ~cyl, inline = TRUE)
+```
+
+Create a `summarywidget` with a reference to the shared data.
+The `summarywidget` default statistic is a simple count of selected items. 
+Click the checkboxes above to see the count change below.
+
+```{r}
+library(summarywidget)
+
+summarywidget(shared_mtcars)
+```
+
+<div>&nbsp;</div>
+
+A `summarywidget` can display a count, arithmetic mean or sum. To display
+a sum or mean you must also specify the column to summarize. Here we show
+the mean MPG for the selected cars. The `digits` parameter controls the number
+of decimal digits displayed.
+
+```{r}
+summarywidget(shared_mtcars, statistic='mean', column='mpg', digits=1)
+```
+
+<div>&nbsp;</div>
+
+You can also apply a filter to the initial data set and display a summary
+restricted to the filtered data. Here we show the count of selected
+cars with automatic transmission.
+
+```{r}
+summarywidget(shared_mtcars, selection=~am==0)
+```
+
+<div>&nbsp;</div>
+  
+Putting it all together, this example shows the average MPG for selected cars
+with automatic transmission.
+
+```{r}
+summarywidget(shared_mtcars, 'mean', 'mpg', selection=~am==0, digits=1)
+```
+
+<div>&nbsp;</div>
+
+The output of `summarywidget` is enclosed in a `<span>` tag so you can use it inline
+in text. See the [Home](index.html) page for an example.
