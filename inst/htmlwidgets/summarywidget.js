@@ -51,7 +51,13 @@ HTMLWidgets.widget({
               break;
           }
 
-          if (x.settings.digits !== null) value = value.toFixed(x.settings.digits);
+          if (x.settings.locales !== null && x.settings.options !== null) {
+            value = value.toLocaleString(x.settings.locales, x.settings.options);
+          } else if (x.settings.locales !== null) {
+            value = value.toLocaleString(x.settings.locales);
+          } else {
+            value = value.toLocaleString();
+          }
           el.innerText = value;
        };
 

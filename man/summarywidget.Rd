@@ -4,9 +4,17 @@
 \alias{summarywidget}
 \title{Show a single summary statistic in a widget}
 \usage{
-summarywidget(data, statistic = c("count", "sum", "mean"), column = NULL,
-  selection = NULL, digits = 0, width = NULL, height = NULL,
-  elementId = NULL)
+summarywidget(
+  data,
+  statistic = c("count", "sum", "mean"),
+  column = NULL,
+  selection = NULL,
+  locales = NULL,
+  options = NULL,
+  width = NULL,
+  height = NULL,
+  elementId = NULL
+)
 }
 \arguments{
 \item{data}{Data to summarize, normally an instance of \link[crosstalk:SharedData]{crosstalk::SharedData}.}
@@ -20,14 +28,22 @@ Not used for \code{count} statistic.}
 a logical vector or a one-sided formula that evaluates to a logical vector.
 If used, the \code{key} given to \link[crosstalk:SharedData]{crosstalk::SharedData} must be a fixed column (not row numbers).}
 
-\item{digits}{Number of decimal places to display, or NULL to display full precision.}
+\item{locales}{A locales string accepted by
+\url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}.}
+
+\item{options}{A list of options accepted by
+\url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}.
+Ignored if \code{locales} argument is not supplied.}
+
+\item{width}{Currently not used.}
+
+\item{height}{Currently not used.}
+
+\item{elementId}{Currently not used.}
 }
 \description{
 A \code{summarywidget} displays a single statistic derived from a linked table.
 Its primary use is with the \code{crosstalk} package. Used with \code{crosstalk},
 a \code{summarywidget} displays a value which updates as the data selection
 changes.
-}
-\seealso{
-\url{https://kent37.github.io/summarywidget}
 }

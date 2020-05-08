@@ -1,3 +1,8 @@
+#' @import checkmate
+#' @import crosstalk
+#' @import htmlwidgets
+NULL
+
 #' Show a single summary statistic in a widget
 #'
 #' A `summarywidget` displays a single statistic derived from a linked table.
@@ -12,17 +17,27 @@
 #' @param selection Expression to select a fixed subset of `data`. May be
 #' a logical vector or a one-sided formula that evaluates to a logical vector.
 #' If used, the `key` given to [crosstalk::SharedData] must be a fixed column (not row numbers).
-#' @param digits Number of decimal places to display, or NULL to display full precision.
-#'
-#' @import crosstalk
-#' @import htmlwidgets
+#' @param locales A locales string accepted by
+#'  \url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}.
+#' @param options A list of options accepted by
+#'  \url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}.
+#'  Ignored if `locales` argument is not supplied.
+#' @param width Currently not used.
+#' @param height Currently not used.
+#' @param elementId Currently not used.
 #'
 #' @export
-#' @seealso \url{https://kent37.github.io/summarywidget}
-summarywidget <- function(data,
-                          statistic=c("count", "sum", "mean"), column = NULL,
-                          selection=NULL, digits=0,
-                          width=NULL, height=NULL, elementId = NULL) {
+summarywidget <- function(
+  data,
+  statistic = c("count", "sum", "mean"),
+  column = NULL,
+  selection = NULL,
+  locales = NULL,
+  options = NULL,
+  width = NULL,
+  height = NULL,
+  elementId = NULL
+) {
 
   if (crosstalk::is.SharedData(data)) {
     # Using Crosstalk
@@ -37,6 +52,14 @@ summarywidget <- function(data,
   }
 
   statistic <- match.arg(statistic)
+
+  if (!is.null(locales)) {
+    qassert(locales, "S1")
+
+    if (!is.null(options)) {
+      qassert(options, "L+")
+    }
+  }
 
   # If selection is given, apply it
   if (!is.null(selection)) {
@@ -69,7 +92,8 @@ summarywidget <- function(data,
     data = data,
     settings = list(
       statistic = statistic,
-      digits = digits,
+      locales = locales,
+      options = options,
       crosstalk_key = key,
       crosstalk_group = group
     )
