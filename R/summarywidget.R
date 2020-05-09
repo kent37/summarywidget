@@ -17,11 +17,14 @@ NULL
 #' @param selection Expression to select a fixed subset of `data`. May be
 #' a logical vector or a one-sided formula that evaluates to a logical vector.
 #' If used, the `key` given to [crosstalk::SharedData] must be a fixed column (not row numbers).
+#' @param digits Shortcut for number of decimal places to display
+#'  (`minimumFractionDigits <- digits` and `maximumFractionDigits <- digits` are
+#'  either added to `localesOptions` or are overwritten).
 #' @param locales A locales string accepted by
+#'  \url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}. If
+#'  `NULL` the preferred language of the user's browser is taken.
+#' @param localesOptions A list of options accepted by
 #'  \url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}.
-#' @param options A list of options accepted by
-#'  \url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}.
-#'  Ignored if `locales` argument is not supplied.
 #' @param width Currently not used.
 #' @param height Currently not used.
 #' @param elementId Currently not used.
@@ -32,8 +35,9 @@ summarywidget <- function(
   statistic = c("count", "sum", "mean"),
   column = NULL,
   selection = NULL,
+  digits = 0,
   locales = NULL,
-  options = NULL,
+  localesOptions = NULL,
   width = NULL,
   height = NULL,
   elementId = NULL
@@ -53,12 +57,18 @@ summarywidget <- function(
 
   statistic <- match.arg(statistic)
 
+  if (!is.null(digits)) {
+    qassert(digits, "N1")
+
+    localesOptions <- as.list(localesOptions)
+    localesOptions$minimumFractionDigits <- digits
+    localesOptions$maximumFractionDigits <- digits
+  }
   if (!is.null(locales)) {
     qassert(locales, "S1")
-
-    if (!is.null(options)) {
-      qassert(options, "L+")
-    }
+  }
+  if (!is.null(localesOptions)) {
+    qassert(localesOptions, "L+")
   }
 
   # If selection is given, apply it
@@ -93,7 +103,7 @@ summarywidget <- function(
     settings = list(
       statistic = statistic,
       locales = locales,
-      options = options,
+      localesOptions = localesOptions,
       crosstalk_key = key,
       crosstalk_group = group
     )

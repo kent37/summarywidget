@@ -9,8 +9,9 @@ summarywidget(
   statistic = c("count", "sum", "mean"),
   column = NULL,
   selection = NULL,
+  digits = 0,
   locales = NULL,
-  options = NULL,
+  localesOptions = NULL,
   width = NULL,
   height = NULL,
   elementId = NULL
@@ -28,12 +29,16 @@ Not used for \code{count} statistic.}
 a logical vector or a one-sided formula that evaluates to a logical vector.
 If used, the \code{key} given to \link[crosstalk:SharedData]{crosstalk::SharedData} must be a fixed column (not row numbers).}
 
-\item{locales}{A locales string accepted by
-\url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}.}
+\item{digits}{Shortcut for number of decimal places to display
+(\code{minimumFractionDigits <- digits} and \code{maximumFractionDigits <- digits} are
+either added to \code{localesOptions} or are overwritten).}
 
-\item{options}{A list of options accepted by
-\url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}.
-Ignored if \code{locales} argument is not supplied.}
+\item{locales}{A locales string accepted by
+\url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}. If
+\code{NULL} the preferred language of the user's browser is taken.}
+
+\item{localesOptions}{A list of options accepted by
+\url{https://www.w3schools.com/jsref/jsref_tolocalestring_number.asp}.}
 
 \item{width}{Currently not used.}
 

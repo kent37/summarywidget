@@ -51,13 +51,16 @@ HTMLWidgets.widget({
               break;
           }
 
-          if (x.settings.locales !== null && x.settings.options !== null) {
-            value = value.toLocaleString(x.settings.locales, x.settings.options);
+          if (x.settings.locales !== null && x.settings.localesOptions !== null) {
+            value = value.toLocaleString(x.settings.locales, x.settings.localesOptions);
           } else if (x.settings.locales !== null) {
             value = value.toLocaleString(x.settings.locales);
+          } else if (x.settings.localesOptions !== null) {
+            value = value.toLocaleString(navigator.language, x.settings.localesOptions);
           } else {
-            value = value.toLocaleString();
+            value = value.toLocaleString(navigator.language);
           }
+
           el.innerText = value;
        };
 
