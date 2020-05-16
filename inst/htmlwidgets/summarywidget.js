@@ -1,3 +1,11 @@
+function defaultLanguageTag() {
+  if (navigator.language !== "") {
+    return navigator.language;
+  } else {
+    return "en";
+  }
+}
+
 HTMLWidgets.widget({
   name: 'summarywidget',
   type: 'output',
@@ -51,7 +59,16 @@ HTMLWidgets.widget({
               break;
           }
 
-          if (x.settings.digits !== null) value = value.toFixed(x.settings.digits);
+          if (x.settings.locales !== null && x.settings.localesOptions !== null) {
+            value = value.toLocaleString(x.settings.locales, x.settings.localesOptions);
+          } else if (x.settings.locales !== null) {
+            value = value.toLocaleString(x.settings.locales);
+          } else if (x.settings.localesOptions !== null) {
+            value = value.toLocaleString(defaultLanguageTag(), x.settings.localesOptions);
+          } else {
+            value = value.toLocaleString(defaultLanguageTag());
+          }
+
           el.innerText = value;
        };
 

@@ -3,5 +3,6 @@
 export(renderSummarywidget)
 export(summarywidget)
 export(summarywidgetOutput)
+import(checkmate)
 import(crosstalk)
 import(htmlwidgets)
