@@ -1,3 +1,11 @@
+function defaultLanguageTag() {
+  if (navigator.language !== "") {
+    return navigator.language;
+  } else {
+    return "en";
+  }
+}
+
 HTMLWidgets.widget({
   name: 'summarywidget',
   type: 'output',
@@ -56,9 +64,9 @@ HTMLWidgets.widget({
           } else if (x.settings.locales !== null) {
             value = value.toLocaleString(x.settings.locales);
           } else if (x.settings.localesOptions !== null) {
-            value = value.toLocaleString(navigator.language, x.settings.localesOptions);
+            value = value.toLocaleString(defaultLanguageTag(), x.settings.localesOptions);
           } else {
-            value = value.toLocaleString(navigator.language);
+            value = value.toLocaleString(defaultLanguageTag());
           }
 
           el.innerText = value;
